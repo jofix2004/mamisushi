@@ -18,6 +18,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      PAGES_BASE_PATH: ${{ vars.PAGES_BASE_PATH }}
 
     defaults:
       run:
@@ -43,11 +45,20 @@ jobs:
       - name: Compute base path
         shell: bash
         run: |
-          repo_name="${GITHUB_REPOSITORY#*/}"
-          if [[ "$repo_name" == "${GITHUB_REPOSITORY_OWNER}.github.io" ]]; then
-            echo "BASE_PATH=" >> "$GITHUB_ENV"
+          if [[ -n "$PAGES_BASE_PATH" ]]; then
+            normalized="/${PAGES_BASE_PATH#/}"
+            normalized="${normalized%/}"
+            if [[ "$normalized" == "/" ]]; then
+              normalized=""
+            fi
+            echo "BASE_PATH=$normalized" >> "$GITHUB_ENV"
           else
-            echo "BASE_PATH=/$repo_name" >> "$GITHUB_ENV"
+            repo_name="${GITHUB_REPOSITORY#*/}"
+            if [[ "$repo_name" == "${GITHUB_REPOSITORY_OWNER}.github.io" ]]; then
+              echo "BASE_PATH=" >> "$GITHUB_ENV"
+            else
+              echo "BASE_PATH=/$repo_name" >> "$GITHUB_ENV"
+            fi
           fi
 
       - name: Build static export

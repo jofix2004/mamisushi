@@ -34,6 +34,19 @@ The workflow automatically:
 - installs dependencies in `frontend`
 - builds a static Next.js export
 - detects whether the repo is a project page (`/<repo>`) or a user page (`/`)
+- can be overridden with a repository variable named `PAGES_BASE_PATH` such as `/mamisushi`
 - uploads and deploys the generated `frontend/out` directory
 
-If you later attach a custom domain, add a `CNAME` file to the exported output or extend the workflow to generate one during build.
+If you later attach a custom domain while still using this workflow, configure that domain in `Settings -> Pages`.
+
+## Custom Domain Notes
+
+GitHub Pages custom domains support an apex domain such as `anigastudio.space` or a subdomain such as `mamisushi.anigastudio.space`.
+
+If you want the site to live at `https://anigastudio.space/mamisushi/`, GitHub Pages alone is not enough because the `/mamisushi` part is a path prefix, not a custom domain. In that setup:
+
+1. Keep GitHub Pages as the static origin.
+2. Set the repository variable `PAGES_BASE_PATH` to `/mamisushi`.
+3. Use another layer in front of Pages, such as Cloudflare, Nginx, or another host for `anigastudio.space`, to proxy or serve the site under `/mamisushi/`.
+
+If you want to stay entirely inside GitHub Pages, the simplest supported custom domain is `https://mamisushi.anigastudio.space/`.
