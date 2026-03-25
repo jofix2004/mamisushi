@@ -1,29 +1,63 @@
-import sushi01 from "@/asses/1.png";
-import sushi02 from "@/asses/2.png";
-import sushi03 from "@/asses/3.png";
-import sushi04 from "@/asses/4.png";
-import sushi05 from "@/asses/5.png";
-import sushi06 from "@/asses/6.png";
-import sushi07 from "@/asses/7.png";
-import sushi08 from "@/asses/8.png";
-import sushi09 from "@/asses/9.png";
-import sushi10 from "@/asses/10.png";
-import sushi11 from "@/asses/11.png";
-import sushi12 from "@/asses/12.png";
+import aburiSalmon from "@/asses/Aburi_Salmon_Sushi.png";
+import amaebi from "@/asses/Amaebi_Sushi.png";
+import anago from "@/asses/Anago_Sushi.png";
+import avocado from "@/asses/Avocado_Sushi.png";
+import california from "@/asses/California_Sushi.png";
+import crabStickNigiri from "@/asses/Crab_Stick_Nigiri.png";
+import ebiNigiri from "@/asses/Ebi_Nigiri.png";
+import hamachi from "@/asses/Hamachi_Sushi.png";
+import hokkigai from "@/asses/Hokkigai_Sushi.png";
+import hotate from "@/asses/Hotate_Sushi.png";
+import ika from "@/asses/Ika_Sushi.png";
+import ikura from "@/asses/Ikura_Sushi.png";
+import inari from "@/asses/Inari_Sushi.png";
+import iwashi from "@/asses/Iwashi_Sushi.png";
+import kani from "@/asses/Kani_Sushi.png";
+import kappaMaki from "@/asses/Kappa_Maki_Sushi.png";
+import maguro from "@/asses/Maguro_Sushi.png";
+import maki from "@/asses/Maki_Sushi.png";
+import natto from "@/asses/Natto_Sushi.png";
+import negitoro from "@/asses/Negitoro_Sushi.png";
+import nigiri from "@/asses/Nigiri_Sushi.png";
+import roeSalmon from "@/asses/Roe_Salmon_Sushi.png";
+import saba from "@/asses/Saba_Sushi.png";
+import salmonIkura from "@/asses/Salmon_Ikura_Sushi.png";
+import tako from "@/asses/Tako_Sushi.png";
+import tamago from "@/asses/Tamago_Sushi.png";
+import tunaNigiri from "@/asses/Tuna_Nigiri_Sushi.png";
+import unagi from "@/asses/Unagi_Sushi.png";
+import uni from "@/asses/Uni_Sushi.png";
 
 export const sushiImages = {
-  "1": sushi01,
-  "2": sushi02,
-  "3": sushi03,
-  "4": sushi04,
-  "5": sushi05,
-  "6": sushi06,
-  "7": sushi07,
-  "8": sushi08,
-  "9": sushi09,
-  "10": sushi10,
-  "11": sushi11,
-  "12": sushi12,
+  aburiSalmon,
+  amaebi,
+  anago,
+  avocado,
+  california,
+  crabStickNigiri,
+  ebiNigiri,
+  hamachi,
+  hokkigai,
+  hotate,
+  ika,
+  ikura,
+  inari,
+  iwashi,
+  kani,
+  kappaMaki,
+  maguro,
+  maki,
+  natto,
+  negitoro,
+  nigiri,
+  roeSalmon,
+  saba,
+  salmonIkura,
+  tako,
+  tamago,
+  tunaNigiri,
+  unagi,
+  uni,
 } as const;
 
 export type SushiImageId = keyof typeof sushiImages;

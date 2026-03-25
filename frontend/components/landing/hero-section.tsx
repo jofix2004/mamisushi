@@ -10,6 +10,11 @@ type HeroSectionProps = {
 };
 
 export function HeroSection({ brandName, content }: HeroSectionProps) {
+  const titleStartsWithBrand = content.title.startsWith(brandName);
+  const titleTail = titleStartsWithBrand
+    ? content.title.slice(brandName.length)
+    : content.title;
+
   return (
     <section
       id="top"
@@ -21,11 +26,18 @@ export function HeroSection({ brandName, content }: HeroSectionProps) {
         <div className="grid min-h-[38rem] items-center gap-8 pb-0 pt-0 md:min-h-[42rem] md:gap-10 lg:grid-cols-12 lg:gap-16 lg:py-0">
           <div className="space-y-7 lg:col-span-5">
             <div className="space-y-6">
-              <p className="text-[11px] uppercase tracking-[0.22em] text-ink-soft">
+              <p className="text-[11px] uppercase tracking-[0.22em] text-accent">
                 {content.eyebrow}
               </p>
               <h1 className="max-w-[12ch] text-balance text-[3.1rem] font-semibold tracking-[-0.06em] text-ink md:max-w-[11ch] md:text-[5.1rem] md:leading-[0.92]">
-                {content.title}
+                {titleStartsWithBrand ? (
+                  <>
+                    <span className="text-accent">{brandName}</span>
+                    <span>{titleTail}</span>
+                  </>
+                ) : (
+                  content.title
+                )}
               </h1>
             </div>
 
@@ -68,15 +80,7 @@ export function HeroSection({ brandName, content }: HeroSectionProps) {
           </div>
 
           <div className="relative lg:col-span-7">
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center"
-            >
-              <span className="select-none text-center text-[clamp(4.5rem,12vw,9.5rem)] font-semibold uppercase tracking-[0.28em] text-ink/[0.06]">
-                3D MODEL
-              </span>
-            </div>
-            <div className="relative z-20">
+            <div className="relative">
               <HeroSushiCluster />
             </div>
           </div>

@@ -3,6 +3,7 @@ import { landingData } from "@/lib/landing-data";
 import { BrandPillars } from "./brand-pillars";
 import { ComboSection } from "./combo-section";
 import { FeaturedMenuSection } from "./featured-menu-section";
+import { FloatingReserveCTA } from "./floating-reserve-cta.client";
 import { HeroSection } from "./hero-section";
 import { MenuExplorerSection } from "./menu-explorer-section";
 import { ReservationSection } from "./reservation-section";
@@ -34,6 +35,7 @@ export function LandingShell() {
         line={landingData.footer.line}
         note={landingData.footer.note}
       />
+      <FloatingReserveCTA brandName={landingData.brandName} />
     </main>
   );
 }

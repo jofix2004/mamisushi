@@ -1,35 +1,124 @@
-import Image from "next/image";
+"use client";
 
-import sushiImage from "@/asses/sushi.png";
+import Image, { type StaticImageData } from "next/image";
+import { motion, useReducedMotion } from "framer-motion";
+
+import sushiLayer1 from "@/asses/sushi_1.png";
+import sushiLayer2 from "@/asses/sushi_2.png";
+import sushiLayer3 from "@/asses/sushi_3.png";
+import sushiLayer4 from "@/asses/sushi_4.png";
 import type { Pillar } from "@/lib/landing-data";
 
 type BrandPillarsProps = {
   pillars: Pillar[];
 };
 
+const sushiLayers: Array<{
+  id: string;
+  src: StaticImageData;
+  alt: string;
+  className: string;
+  delay: number;
+  waveOffset: number;
+}> = [
+  {
+    id: "sushi-1",
+    src: sushiLayer1,
+    alt: "Sushi layer 1",
+    className: "z-40",
+    delay: 0,
+    waveOffset: 0,
+  },
+  {
+    id: "sushi-2",
+    src: sushiLayer2,
+    alt: "Sushi layer 2",
+    className: "z-30",
+    delay: 0.225,
+    waveOffset: 0.28,
+  },
+  {
+    id: "sushi-3",
+    src: sushiLayer3,
+    alt: "Sushi layer 3",
+    className: "z-20",
+    delay: 0.45,
+    waveOffset: 0.56,
+  },
+  {
+    id: "sushi-4",
+    src: sushiLayer4,
+    alt: "Sushi layer 4",
+    className: "z-10",
+    delay: 0.675,
+    waveOffset: 0.84,
+  },
+];
+
 export function BrandPillars({ pillars }: BrandPillarsProps) {
+  const reduceMotion = useReducedMotion();
+  const revealSlideDuration = 2.75;
+  const revealFadeDuration = 2.25;
+  const waveDuration = 6.2;
+  const revealCompleteAfter = Math.max(revealSlideDuration, revealFadeDuration);
+
   return (
     <section className="px-[2.5rem] py-12 md:px-[5rem] md:py-14 xl:px-[7.4rem]">
       <div className="mx-auto max-w-[1320px] border-t border-line pt-5">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-center lg:gap-16">
           <div className="relative mx-auto aspect-[5/4] w-full max-w-[48rem]">
-            <div className="absolute inset-[14%] rounded-full bg-accent-soft/35 blur-[90px]" />
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center"
-            >
-              <span className="select-none text-center text-[clamp(4.2rem,11vw,8.5rem)] font-semibold uppercase tracking-[0.26em] text-ink/[0.06]">
-                3D MODEL
-              </span>
-            </div>
-            <div className="absolute bottom-[13%] left-1/2 h-9 w-[50%] -translate-x-1/2 rotate-[9deg] rounded-full bg-[rgba(63,41,34,0.18)] blur-[22px] md:h-10 md:blur-[24px]" />
-            <Image
-              src={sushiImage}
-              alt="Salmon nigiri"
-              fill
-              sizes="(max-width: 768px) 80vw, 700px"
-              className="relative z-20 object-contain object-center scale-[1.15] drop-shadow-[0_34px_38px_rgba(40,26,20,0.14)]"
-            />
+            <div className="absolute inset-[12%] rounded-full bg-accent-soft/35 blur-[90px]" />
+            <div className="absolute bottom-[10%] left-1/2 h-10 w-[58%] -translate-x-1/2 rotate-[9deg] rounded-full bg-[rgba(63,41,34,0.16)] blur-[26px] md:h-12 md:blur-[28px]" />
+
+            {sushiLayers.map((layer) => (
+              <motion.div
+                key={layer.id}
+                initial={reduceMotion ? false : { opacity: 0, y: 72 }}
+                whileInView={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.7, margin: "-12% 0px -12% 0px" }}
+                transition={
+                  reduceMotion
+                    ? { duration: 0 }
+                    : {
+                        opacity: {
+                          duration: revealFadeDuration,
+                          delay: layer.delay,
+                          ease: "linear",
+                        },
+                        y: {
+                          duration: revealSlideDuration,
+                          delay: layer.delay,
+                          ease: [0.16, 1, 0.3, 1],
+                        },
+                      }
+                }
+                className={`absolute inset-0 ${layer.className}`}
+              >
+                <motion.div
+                  className="relative h-full"
+                  animate={reduceMotion ? { y: 0 } : { y: [0, -10, 0, 8, 0] }}
+                  transition={
+                    reduceMotion
+                      ? { duration: 0 }
+                      : {
+                          delay: layer.delay + revealCompleteAfter + layer.waveOffset,
+                          duration: waveDuration,
+                          repeat: Number.POSITIVE_INFINITY,
+                          ease: "easeInOut",
+                          times: [0, 0.25, 0.5, 0.75, 1],
+                        }
+                  }
+                >
+                  <Image
+                    src={layer.src}
+                    alt={layer.alt}
+                    fill
+                    sizes="(max-width: 768px) 80vw, 700px"
+                    className="object-contain object-center drop-shadow-[0_28px_32px_rgba(40,26,20,0.14)]"
+                  />
+                </motion.div>
+              </motion.div>
+            ))}
           </div>
 
           <div className="space-y-6 lg:ml-auto lg:w-full lg:max-w-[36rem]">

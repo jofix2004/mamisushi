@@ -14,6 +14,10 @@ type MenuGroupRailProps = {
   index: number;
 };
 
+function formatOrdinal(value: number) {
+  return String(value).padStart(2, "0");
+}
+
 function GroupIntro({
   group,
   index,
@@ -29,8 +33,8 @@ function GroupIntro({
 
   return (
     <div className={`space-y-4 ${className}`}>
-      <p className="text-[10px] uppercase tracking-[0.24em] text-accent">
-        0{index + 1}
+      <p className="text-[15px] uppercase tracking-[0.24em] text-accent">
+        {formatOrdinal(index + 1)}
       </p>
       <h3
         className={`max-w-[15ch] text-balance text-[2.25rem] font-semibold tracking-[-0.05em] text-ink md:max-w-[16ch] md:text-[3rem] md:leading-[0.94] ${isRight ? "lg:ml-auto" : ""}`}
@@ -43,7 +47,9 @@ function GroupIntro({
         {group.description}
       </p>
       {group.priceFrom ? (
-        <p className={`text-base font-medium text-accent ${isRight ? "lg:ml-auto" : ""}`}>
+        <p
+          className={`text-[1.12rem] font-medium leading-none text-accent md:text-[1.28rem] ${isRight ? "lg:ml-auto" : ""}`}
+        >
           {group.priceFrom}
         </p>
       ) : null}
@@ -59,9 +65,9 @@ function ItemVisual({
   heightClass: string;
 }) {
   return (
-    <div className={`relative ${heightClass}`}>
-      <div className="absolute bottom-[13%] left-1/2 h-7 w-[58%] -translate-x-1/2 rotate-[9deg] rounded-full bg-[rgba(63,41,34,0.18)] blur-[17px] md:h-8 md:blur-[19px]" />
-      <div className="relative h-full">
+    <div className={`group/item relative ${heightClass}`}>
+      <div className="absolute bottom-[13%] left-1/2 h-7 w-[58%] -translate-x-1/2 rotate-[9deg] rounded-full bg-[rgba(63,41,34,0.18)] blur-[17px] transition-opacity duration-500 ease-out group-hover/item:opacity-55 md:h-8 md:blur-[19px]" />
+      <div className="relative h-full transition-transform duration-500 ease-out group-hover/item:-translate-y-2">
         <Image
           src={sushiImages[item.imageId]}
           alt={item.name}
@@ -76,12 +82,13 @@ function ItemVisual({
 
 function SpotlightGroup({ group, index }: MenuGroupRailProps) {
   const [hero, ...rest] = group.items;
+  const sectionIndex = formatOrdinal(index + 1);
 
   return (
     <div className="grid gap-10 border-t border-line pt-10 md:pt-12 lg:grid-cols-12 lg:gap-14">
       <div className="relative grid gap-8 lg:col-span-8 lg:order-1 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
         <p className="pointer-events-none absolute right-0 top-0 hidden text-[clamp(4rem,10vw,7.5rem)] font-semibold tracking-[-0.08em] text-ink/[0.05] lg:block">
-          01
+          {sectionIndex}
         </p>
         <div className="grid gap-4">
           {rest.map((item) => (
@@ -128,10 +135,11 @@ function MarqueeGroup({ group, index }: MenuGroupRailProps) {
   const sideItems = rest.slice(0, 3);
   const railItems = [...group.items, ...group.items];
   const { containerRef, setItemRef } = useRailFocus<HTMLElement>();
+  const sectionIndex = formatOrdinal(index + 1);
   const railStyle = {
     "--rail-gap": "2rem",
-    "--rail-duration": `${Math.max(60, group.items.length * 14)}s`,
-    "--rail-start": "calc(-23% - (var(--rail-gap) / 4))",
+    "--rail-duration": `${Math.max(40, group.items.length * 9.5)}s`,
+    "--rail-start": "0px",
   } as CSSProperties;
 
   return (
@@ -141,7 +149,7 @@ function MarqueeGroup({ group, index }: MenuGroupRailProps) {
 
         <div className="relative overflow-hidden border-t border-line pt-5 lg:border-t-0 lg:pt-0">
           <p className="pointer-events-none absolute right-0 top-0 hidden text-[clamp(4rem,11vw,8rem)] font-semibold tracking-[-0.08em] text-ink/[0.05] lg:block">
-            02
+            {sectionIndex}
           </p>
 
           <div className="grid gap-8 md:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] md:items-end">
@@ -161,14 +169,14 @@ function MarqueeGroup({ group, index }: MenuGroupRailProps) {
             </article>
 
             <div className="border-t border-line pt-4 md:border-t-0 md:pt-0">
-              <p className="text-[10px] uppercase tracking-[0.24em] text-accent">
+              <p className="text-[15px] uppercase tracking-[0.24em] text-accent">
                 Gọi thêm
               </p>
               <div className="mt-4 divide-y divide-line">
                 {sideItems.map((item, itemIndex) => (
                   <article key={item.id} className="py-4">
                     <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
-                      0{itemIndex + 2}
+                      {formatOrdinal(itemIndex + 2)}
                     </p>
                     <h4 className="mt-2 text-[1.1rem] font-semibold tracking-[-0.02em] text-ink md:text-[1.22rem]">
                       {item.name}
@@ -219,16 +227,17 @@ function MarqueeGroup({ group, index }: MenuGroupRailProps) {
 
 function EditorialGroup({ group, index }: MenuGroupRailProps) {
   const items = group.items;
+  const sectionIndex = formatOrdinal(index + 1);
 
   return (
     <div className="space-y-6 border-t border-line pt-9 md:pt-10">
       <div className="grid gap-6 lg:grid-cols-[minmax(0,8fr)_minmax(0,4fr)] lg:items-end lg:gap-10">
         <div className="relative border-t border-line pt-5 lg:border-t-0 lg:pt-0">
           <p className="pointer-events-none absolute right-0 top-0 hidden text-[clamp(4rem,10vw,7.5rem)] font-semibold tracking-[-0.08em] text-ink/[0.05] lg:block">
-            03
+            {sectionIndex}
           </p>
           <p className="max-w-[34ch] text-pretty text-base leading-8 text-ink-soft">
-            Một dải món có nhịp rõ hơn, đậm hơn và đáng để gọi từng món riêng.
+            Toàn những món rõ vị hơn một chút, hợp khi muốn gọi lẻ từng món cho cả bàn.
           </p>
         </div>
 
@@ -247,7 +256,7 @@ function EditorialGroup({ group, index }: MenuGroupRailProps) {
             className="grid gap-4 border-b border-line py-3.5 last:border-b-0 md:grid-cols-[3rem_minmax(10rem,0.88fr)_minmax(0,1.15fr)_10rem] md:items-center md:gap-5"
           >
             <p className="text-[1.2rem] font-semibold tracking-[-0.03em] text-accent md:text-[1.45rem]">
-              0{itemIndex + 1}
+              {formatOrdinal(itemIndex + 1)}
             </p>
             <h4 className="text-[0.98rem] font-medium italic tracking-[-0.02em] text-ink md:text-[1.1rem]">
               {item.name}
@@ -266,6 +275,7 @@ function EditorialGroup({ group, index }: MenuGroupRailProps) {
 function MatrixGroup({ group, index }: MenuGroupRailProps) {
   const [hero, second, ...rest] = group.items;
   const mainItems = [hero, second];
+  const sectionIndex = formatOrdinal(index + 1);
 
   return (
     <div className="space-y-8 border-t border-line pt-10 md:pt-12">
@@ -273,14 +283,14 @@ function MatrixGroup({ group, index }: MenuGroupRailProps) {
         <div className="space-y-6 lg:pr-8">
           <GroupIntro group={group} index={index} />
           <div className="border-t border-line pt-4">
-            <p className="text-[10px] uppercase tracking-[0.24em] text-accent">
+            <p className="text-[15px] uppercase tracking-[0.24em] text-accent">
               Món chính
             </p>
             <div className="mt-4 divide-y divide-line">
               {mainItems.map((item, itemIndex) => (
                 <article key={item.id} className="py-3">
                   <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
-                    0{itemIndex + 1}
+                    {formatOrdinal(itemIndex + 1)}
                   </p>
                   <h4 className="mt-1 text-[1.26rem] font-semibold tracking-[-0.03em] text-ink md:text-[1.46rem]">
                     {item.name}
@@ -293,10 +303,10 @@ function MatrixGroup({ group, index }: MenuGroupRailProps) {
 
         <div className="relative space-y-6">
           <p className="pointer-events-none absolute right-0 top-0 hidden text-[clamp(4rem,10vw,7.5rem)] font-semibold tracking-[-0.08em] text-ink/[0.05] lg:block">
-            04
+            {sectionIndex}
           </p>
           <div className="space-y-3 border-t border-line pt-5 lg:border-t-0 lg:pt-0">
-            <p className="text-[10px] uppercase tracking-[0.24em] text-accent">
+            <p className="text-[15px] uppercase tracking-[0.24em] text-accent">
               Món chính
             </p>
             <div className="grid gap-6 md:grid-cols-2">
@@ -320,7 +330,7 @@ function MatrixGroup({ group, index }: MenuGroupRailProps) {
           </div>
 
           <div className="space-y-3 border-t border-line pt-5">
-            <p className="text-[10px] uppercase tracking-[0.24em] text-ink-soft">
+            <p className="text-[15px] uppercase tracking-[0.24em] text-ink-soft">
               Gọi thêm
             </p>
             <div className="grid gap-6 md:grid-cols-3">

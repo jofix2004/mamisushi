@@ -9,7 +9,7 @@ export function LandingHeader({ brandName }: LandingHeaderProps) {
     <header className="flex items-center justify-between gap-4 py-4 md:py-5">
       <a href="#top" className="group inline-flex items-center gap-3">
         <span className="inline-flex h-2.5 w-2.5 rounded-full bg-accent" />
-        <span className="text-sm font-semibold uppercase tracking-[0.24em] text-ink">
+        <span className="text-sm font-semibold uppercase tracking-[0.24em] text-accent">
           {brandName}
         </span>
       </a>

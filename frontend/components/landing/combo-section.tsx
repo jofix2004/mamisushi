@@ -11,7 +11,7 @@ export function ComboSection({ combos }: ComboSectionProps) {
   return (
     <section
       id="combos"
-      className="px-[1.9rem] py-16 md:px-[3.8rem] md:py-20 xl:px-[6.2rem]"
+      className="px-[1.9rem] py-12 md:px-[3.8rem] md:py-16 xl:px-[6.2rem]"
     >
       <div className="mx-auto max-w-[1320px] space-y-10">
         <SectionHeading

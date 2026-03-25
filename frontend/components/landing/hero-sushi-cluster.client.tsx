@@ -11,34 +11,41 @@ const assets: Array<{
   label: string;
   size: string;
   position: string;
+  labelClass: string;
   delay: number;
   imageId: SushiImageId;
 }> = [
   {
     id: "main",
-    label: "Salmon Nigiri",
-    size: "h-[17rem] w-[17rem] md:h-[25rem] md:w-[25rem]",
-    position: "left-[16%] top-[18%] md:left-[20%] md:top-[14%]",
+    label: "Salmon Ikura",
+    size: "h-[18.5rem] w-[18.5rem] md:h-[26rem] md:w-[26rem]",
+    position: "left-[4%] top-[8%] z-20 md:left-[7%] md:top-[10%]",
+    labelClass: "text-[1.35rem] md:text-[1.9rem]",
     delay: 0,
-    imageId: "11",
+    imageId: "salmonIkura",
   },
   {
     id: "top",
-    label: "Ikura Gunkan",
-    size: "h-[8rem] w-[8rem] md:h-[10rem] md:w-[10rem]",
-    position: "right-[10%] top-[8%] md:right-[12%] md:top-[8%]",
+    label: "Tuna Nigiri",
+    size: "h-[10.75rem] w-[10.75rem] md:h-[13.75rem] md:w-[13.75rem]",
+    position: "right-[5%] bottom-[8%] z-30 md:right-[7%] md:bottom-[10%]",
+    labelClass: "text-[1.15rem] md:text-[1.5rem]",
     delay: 0.5,
-    imageId: "4",
+    imageId: "tunaNigiri",
   },
   {
     id: "bottom",
-    label: "Uni Gunkan",
-    size: "h-[9rem] w-[9rem] md:h-[11rem] md:w-[11rem]",
-    position: "right-[4%] bottom-[8%] md:right-[4%] md:bottom-[10%]",
+    label: "Avocado Roll",
+    size: "h-[9.5rem] w-[9.5rem] md:h-[12.25rem] md:w-[12.25rem]",
+    position: "right-[13%] top-[4%] z-10 md:right-[15%] md:top-[6%]",
+    labelClass: "text-[1rem] md:text-[1.25rem]",
     delay: 0.9,
-    imageId: "8",
+    imageId: "avocado",
   },
 ];
+
+const revealSlideDuration = 2.7;
+const revealFadeDuration = 2.2;
 
 export function HeroSushiCluster() {
   const reduceMotion = useReducedMotion();
@@ -50,24 +57,45 @@ export function HeroSushiCluster() {
       {assets.map((asset, index) => (
         <motion.div
           key={asset.id}
-          initial={false}
-          animate={reduceMotion ? { y: 0 } : { y: [0, -10, 0] }}
+          initial={reduceMotion ? false : { opacity: 0, y: 64 }}
+          animate={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
           transition={
             reduceMotion
               ? { duration: 0 }
               : {
-                  delay: asset.delay,
-                  duration: 7 + index,
-                  repeat: Number.POSITIVE_INFINITY,
-                  repeatType: "mirror",
-                  ease: "easeInOut",
+                  opacity: {
+                    delay: asset.delay * 1.25,
+                    duration: revealFadeDuration,
+                    ease: "linear",
+                  },
+                  y: {
+                    delay: asset.delay * 1.25,
+                    duration: revealSlideDuration,
+                    ease: [0.16, 1, 0.3, 1],
+                  },
                 }
           }
           className={`absolute ${asset.position} ${asset.size}`}
         >
-          <div className="relative h-full">
-            <div className="absolute bottom-[13%] left-1/2 h-8 w-[60%] -translate-x-1/2 rotate-[9deg] rounded-full bg-[rgba(63,41,34,0.19)] blur-[18px] md:h-9 md:blur-[20px]" />
-            <div className="relative h-full">
+          <motion.div
+            className="group/item relative h-full"
+            animate={reduceMotion ? { y: 0 } : { y: [0, -10, 0] }}
+            transition={
+              reduceMotion
+                ? { duration: 0 }
+                : {
+                    delay:
+                      asset.delay * 1.25 +
+                      Math.max(revealSlideDuration, revealFadeDuration),
+                    duration: 4.8 + index * 0.7,
+                    repeat: Number.POSITIVE_INFINITY,
+                    repeatType: "mirror",
+                    ease: "easeInOut",
+                  }
+            }
+          >
+            <div className="absolute bottom-[13%] left-1/2 h-8 w-[60%] -translate-x-1/2 rotate-[9deg] rounded-full bg-[rgba(63,41,34,0.19)] blur-[18px] transition-opacity duration-500 ease-out group-hover/item:opacity-55 md:h-9 md:blur-[20px]" />
+            <div className="relative h-full transition-transform duration-500 ease-out group-hover/item:-translate-y-2">
               <Image
                 src={sushiImages[asset.imageId]}
                 alt={asset.label}
@@ -77,15 +105,14 @@ export function HeroSushiCluster() {
                 className="object-contain object-center p-2 scale-[1.25] drop-shadow-[0_26px_30px_rgba(40,26,20,0.14)]"
               />
             </div>
-            <div className="absolute inset-x-0 bottom-0 space-y-1 text-center">
-              <p className="text-[10px] uppercase tracking-[0.22em] text-ink-soft">
-                Sushi lẻ
-              </p>
-              <p className="text-lg font-semibold tracking-tight text-ink md:text-xl">
+            <div className="absolute inset-x-0 bottom-0 text-center">
+              <p
+                className={`${asset.labelClass} font-medium leading-none tracking-[-0.02em] text-ink/50`}
+              >
                 {asset.label}
               </p>
             </div>
-          </div>
+          </motion.div>
         </motion.div>
       ))}
     </div>
