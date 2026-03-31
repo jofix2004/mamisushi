@@ -1,7 +1,7 @@
 import type { FeaturedItem, PromoLine } from "@/lib/landing-data";
 
 import { FeaturedMenuRail } from "./featured-menu-rail.client";
-import { SectionHeading } from "./primitives/section-heading";
+import { Highlight, SectionHeading } from "./primitives/section-heading";
 
 type FeaturedMenuSectionProps = {
   items: FeaturedItem[];
@@ -19,8 +19,17 @@ export function FeaturedMenuSection({
     >
       <div className="mx-auto max-w-[1320px] space-y-12">
         <SectionHeading
-          eyebrow="Đang được gọi nhiều"
-          title="Bắt đầu từ những món dễ gọi nhất"
+          eyebrow={
+            <div className="inline-flex items-center gap-2">
+              <span className="size-1.5 rounded-full bg-accent animate-pulse" />
+              Đang được gọi nhiều
+            </div>
+          }
+          title={
+            <>
+              Bắt đầu từ những món <Highlight>dễ gọi nhất</Highlight>
+            </>
+          }
           description="Nếu chưa biết gọi gì, cứ bắt đầu từ vài món dễ chọn và dễ chia cho cả bàn."
         />
 

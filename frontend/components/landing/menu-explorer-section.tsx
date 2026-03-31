@@ -1,7 +1,7 @@
 import type { MenuGroup } from "@/lib/landing-data";
 
 import { MenuGroupRail } from "./menu-group-rail.client";
-import { SectionHeading } from "./primitives/section-heading";
+import { Highlight, SectionHeading } from "./primitives/section-heading";
 
 type MenuExplorerSectionProps = {
   groups: MenuGroup[];
@@ -15,8 +15,17 @@ export function MenuExplorerSection({ groups }: MenuExplorerSectionProps) {
     >
       <div className="mx-auto max-w-[1320px] space-y-12">
         <SectionHeading
-          eyebrow="Khám phá menu"
-          title="Menu chia sẵn theo nhóm món"
+          eyebrow={
+            <div className="inline-flex items-center gap-2">
+              <span className="size-1.5 rounded-full bg-accent animate-pulse" />
+              Khám phá menu
+            </div>
+          }
+          title={
+            <>
+              Menu chia sẵn theo <Highlight>nhóm món</Highlight>
+            </>
+          }
           description="Muốn ăn gì thì xem đúng nhóm đó trước, đỡ phải lướt cả menu."
         />
 

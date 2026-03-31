@@ -1,8 +1,8 @@
-import type { HeroContent } from "@/lib/landing-data";
+﻿import type { HeroContent } from "@/lib/landing-data";
 
 import { HeroSushiCluster } from "./hero-sushi-cluster.client";
 import { LandingHeader } from "./landing-header";
-import { ArrowDownIcon, ArrowRightIcon } from "./primitives/icons";
+import { ArrowRightIcon } from "./primitives/icons";
 
 type HeroSectionProps = {
   brandName: string;
@@ -14,6 +14,7 @@ export function HeroSection({ brandName, content }: HeroSectionProps) {
   const titleTail = titleStartsWithBrand
     ? content.title.slice(brandName.length)
     : content.title;
+  const hasChips = content.chips.length > 0;
 
   return (
     <section
@@ -41,40 +42,42 @@ export function HeroSection({ brandName, content }: HeroSectionProps) {
               </h1>
             </div>
 
-            <div className="grid gap-5 border-t border-line/80 pt-4 lg:grid-cols-[minmax(0,3.3fr)_minmax(0,2.7fr)] lg:gap-8">
-              <p className="max-w-[34ch] text-pretty text-base leading-8 text-ink-soft">
-                {content.description}
-              </p>
+            {hasChips ? (
+              <div className="grid gap-5 border-t border-line/80 pt-4 lg:grid-cols-[minmax(0,3.3fr)_minmax(0,2.7fr)] lg:gap-8">
+                <p className="max-w-[34ch] text-pretty text-base leading-8 text-ink-soft">
+                  {content.description}
+                </p>
 
-              <div className="space-y-3 text-[11px] uppercase tracking-[0.2em] text-ink-soft">
-                {content.chips.map((chip) => (
-                  <p key={chip} className="border-b border-line/70 pb-3">
-                    {chip}
-                  </p>
-                ))}
+                <div className="space-y-3 text-[11px] uppercase tracking-[0.2em] text-ink-soft">
+                  {content.chips.map((chip) => (
+                    <p key={chip} className="border-b border-line/70 pb-3">
+                      {chip}
+                    </p>
+                  ))}
+                </div>
               </div>
-            </div>
+            ) : (
+              <div className="border-t border-line/80 pt-4">
+                <p className="max-w-[34ch] text-pretty text-base leading-8 text-ink-soft">
+                  {content.description}
+                </p>
+              </div>
+            )}
 
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-3 pt-1">
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-1 text-[11px] uppercase tracking-[0.18em]">
               <a
                 href={content.primaryCta.href}
-                className="inline-flex items-center gap-2 border-b border-accent pb-1 text-sm font-medium text-accent hover:text-accent-deep"
+                className="inline-flex items-center gap-2 border-b border-accent pb-1 font-medium text-accent hover:text-accent-deep"
               >
                 {content.primaryCta.label}
-                <ArrowRightIcon className="size-[18px]" />
+                <ArrowRightIcon className="size-4" />
               </a>
               <a
                 href={content.secondaryCta.href}
-                className="inline-flex items-center gap-2 border-b border-transparent pb-1 text-sm font-medium text-ink-soft hover:border-line hover:text-ink"
+                className="inline-flex items-center gap-2 border-b border-transparent pb-1 font-medium text-ink-soft hover:border-line hover:text-ink"
               >
                 {content.secondaryCta.label}
-              </a>
-              <a
-                href="#featured"
-                className="inline-flex items-center gap-2 text-sm font-medium text-ink-soft hover:text-ink"
-              >
-                <ArrowDownIcon className="size-[18px]" />
-                Cuộn xuống để xem phần được gọi nhiều
+                <ArrowRightIcon className="size-4" />
               </a>
             </div>
           </div>

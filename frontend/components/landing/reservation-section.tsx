@@ -31,11 +31,16 @@ export function ReservationSection({
     >
       <div className="mx-auto max-w-[1320px] space-y-8">
         <div className="mx-auto max-w-[34rem] space-y-4 text-center">
-          <p className="text-[11px] uppercase tracking-[0.22em] text-ink-soft">
+          <div className="flex items-center justify-center gap-2 text-[11px] uppercase tracking-[0.22em] text-ink-soft">
+            <span className="size-1.5 rounded-full bg-accent animate-pulse" />
             Đặt bàn trước
-          </p>
+          </div>
           <h2 className="mx-auto max-w-[13ch] text-balance text-[2.65rem] font-semibold tracking-[-0.05em] text-ink md:max-w-[14ch] md:text-[4.45rem] md:leading-[0.94]">
-            Đặt nhanh. Quán gọi lại.
+            Đặt nhanh.{" "}
+            <span className="relative inline-block text-accent">
+              <span className="relative z-10">Quán gọi lại.</span>
+              <span className="absolute bottom-[0.15em] left-[-2%] -z-10 h-[0.25em] w-[104%] -rotate-1 rounded-sm bg-accent/20" />
+            </span>
           </h2>
         </div>
 

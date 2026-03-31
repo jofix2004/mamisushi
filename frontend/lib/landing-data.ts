@@ -30,6 +30,8 @@ export type FeaturedItem = {
   name: string;
   badge: string;
   description: string;
+  ingredients?: string;
+  story?: string;
   imageId: SushiImageId;
 };
 
@@ -51,6 +53,8 @@ export type MenuItem = {
   description: string;
   badge?: string;
   price?: string;
+  ingredients?: string;
+  story?: string;
   imageId: SushiImageId;
 };
 
@@ -74,39 +78,39 @@ export const landingData = {
   brandName: "Nami Sushi",
   hero: {
     eyebrow: "Nami Sushi",
-    title: "Nami Sushi, đi ăn gọn mà vui.",
+    title: "Nami Sushi. Vừa vặn từng khoảnh khắc.",
     description:
-      "Một quán sushi hiện đại cho những buổi đi ăn cùng bạn bè: sáng, gọn, dễ rủ nhau ghé và đủ rõ ràng để gọi món không bị rối.",
-    chips: ["Combo 2-4 người", "Đồng giá 39.000đ / 14:00 - 17:00", "Đặt bàn nhanh"],
+      "Một điểm chạm hiện đại nơi hương vị, không gian và nhịp thưởng thức được điều chỉnh để hợp với lối sống trẻ: tự nhiên, thoải mái và đầy cảm hứng.",
+    chips: [],
     primaryCta: {
-      label: "Xem combo",
-      href: "#combos",
+      label: "Đặt bàn",
+      href: "#reserve",
     },
     secondaryCta: {
-      label: "Xem menu",
-      href: "#menu",
+      label: "Tìm hiểu thêm",
+      href: "#featured",
     },
   } satisfies HeroContent,
   pillars: [
     {
-      id: "pretty",
-      title: "Combo rõ cho nhóm 2-4",
-      description: "Đi đông vẫn gọi nhanh, không phải ngồi chia món qua quá nhiều lượt.",
+      id: "anywhere",
+      title: "Gọi món nhẹ tênh",
+      description: "Menu gãy gọn, combo thiết kế sẵn giúp cả bàn chốt món cực nhanh không đắn đo.",
     },
     {
-      id: "accessible",
-      title: "Menu chia theo nhóm",
-      description: "Nhìn vào biết nên bắt đầu từ đâu và gọi tiếp gì cho cả bàn.",
+      id: "perfect-pair",
+      title: "Đồng hành sở thích",
+      description: "Miếng cuộn vừa miệng, cực kỳ hợp lý để nhâm nhi lúc cày phim hay nghe podcast.",
     },
     {
-      id: "modern",
-      title: "Chất Nhật hiện đại",
-      description: "Sáng, gọn và đủ trẻ để đi thường xuyên mà không bị kiểu cách.",
+      id: "daily-routine",
+      title: "Điểm hẹn thường nhật",
+      description: "Không gian cởi mở, lý tưởng để rủ nhau ghé ngang sau giờ học hay giờ làm.",
     },
     {
-      id: "group",
-      title: "Dễ rủ nhau ghé",
-      description: "Hợp cho những buổi sau giờ học, giờ làm hoặc đi nhóm bất chợt.",
+      id: "just-right-price",
+      title: "Chất lượng, hợp lý",
+      description: "Tính trải nghiệm được tinh chỉnh không phô trương, hoàn toàn vừa vặn với túi tiền.",
     },
   ] satisfies Pillar[],
   promos: [
@@ -144,6 +148,8 @@ export const landingData = {
       name: "Ebi Nigiri",
       badge: "Dễ gọi",
       description: "Nhẹ, sạch vị và thường là món dễ chốt đầu tiên khi cả bàn muốn gọi nhanh.",
+      ingredients: "Tôm hấp · Cơm trộn giấm",
+      story: "Miếng tôm ngọt tự nhiên nằm vừa vặn trên nắm cơm ấm. Không cần thêm gì, vì đơn giản đã là đủ.",
       imageId: "ebiNigiri",
     },
     {
@@ -151,6 +157,8 @@ export const landingData = {
       name: "Tuna Nigiri",
       badge: "Đậm vừa",
       description: "Rõ vị hơn một chút nhưng vẫn dễ ăn, hợp cho người muốn gọi thêm món cá đậm hơn.",
+      ingredients: "Cá ngừ tươi · Cơm trộn giấm",
+      story: "Lát cá ngừ đỏ au, mềm tan ngay đầu lưỡi. Vị umami đậm mà vẫn thanh, đủ để gây thương nhớ.",
       imageId: "tunaNigiri",
     },
     {
@@ -158,6 +166,8 @@ export const landingData = {
       name: "Tamago Sushi",
       badge: "Mềm vị",
       description: "Nhẹ và dễ ăn, hợp để xen giữa các món cá đậm hơn.",
+      ingredients: "Trứng cuộn Nhật · Cơm trộn giấm · Rong biển nori",
+      story: "Lát trứng cuộn mịn, ngọt dịu theo kiểu Nhật truyền thống. Món nghỉ ngơi giữa những miếng cá đậm.",
       imageId: "tamago",
     },
     {
@@ -165,6 +175,8 @@ export const landingData = {
       name: "Kani Sushi",
       badge: "Dễ ăn",
       description: "Vị nhẹ và khá hợp khi đi cùng nhiều gu khác nhau.",
+      ingredients: "Thanh cua Nhật · Cơm trộn giấm",
+      story: "Thanh cua mềm, vị biển nhẹ nhàng. Món an toàn mà ai cũng gọi được, ai cũng thích.",
       imageId: "kani",
     },
     {
@@ -172,6 +184,8 @@ export const landingData = {
       name: "Salmon Ikura",
       badge: "Điểm nhấn",
       description: "Mềm và rõ vị hơn, hợp để gọi thêm khi muốn bàn có một món nổi hơn.",
+      ingredients: "Cá hồi tươi · Trứng cá hồi ikura · Cơm trộn giấm",
+      story: "Cá hồi béo mịn kết hợp những hạt ikura tươi bung vỡ ngay khi chạm răng. Vừa sang vừa vui miệng.",
       imageId: "salmonIkura",
     },
     {
@@ -179,6 +193,8 @@ export const landingData = {
       name: "Classic Maki",
       badge: "Gọn vị",
       description: "Gọn gàng, dễ gắp và rất hợp để chen giữa các món lẻ khi cả bàn muốn chia nhanh.",
+      ingredients: "Cá hồi · Cơm trộn giấm · Rong biển nori · Dưa leo",
+      story: "Cuộn tròn gọn gàng, nhân cá hồi tươi bên trong lớp cơm và nori giòn. Chia nhanh, ăn vui.",
       imageId: "maki",
     },
   ] satisfies FeaturedItem[],
@@ -232,6 +248,8 @@ export const landingData = {
           name: "Classic Nigiri",
           description: "Món cơ bản, dễ ăn và gần như ai trong bàn cũng gọi được.",
           badge: "Dễ ăn",
+          ingredients: "Cá hồi tươi · Cơm trộn giấm",
+          story: "Salmon mềm béo lên miệng rất gọn, cơm giấm ôm vị vừa đủ để ai ăn cũng thấy dễ chịu.",
           imageId: "nigiri",
         },
         {
@@ -239,6 +257,8 @@ export const landingData = {
           name: "Crab Stick Nigiri",
           description: "Vị nhẹ và khá an toàn nếu muốn mở đầu bàn ăn bằng món dễ ăn.",
           badge: "Dễ chọn",
+          ingredients: "Thanh cua Nhật · Cơm trộn giấm",
+          story: "Thanh cua ngọt nhẹ, mềm và sạch vị; kiểu món mở màn không cần nghĩ nhiều vẫn ổn.",
           imageId: "crabStickNigiri",
         },
         {
@@ -246,6 +266,8 @@ export const landingData = {
           name: "Amaebi Sushi",
           description: "Nhẹ và thanh, hợp cho người thích vị dịu hơn một chút.",
           badge: "Nhẹ vị",
+          ingredients: "Tôm ngọt sống · Cơm trộn giấm",
+          story: "Tôm ngọt mượt, càng nhai càng rõ độ ngọt thanh và cảm giác mát đầu lưỡi.",
           imageId: "amaebi",
         },
         {
@@ -253,6 +275,8 @@ export const landingData = {
           name: "Hotate Sushi",
           description: "Êm vị, dễ ăn và không bị ngấy.",
           badge: "Êm vị",
+          ingredients: "Sò điệp Hokkaido · Cơm trộn giấm · Muối chanh",
+          story: "Sò điệp béo êm, thơm vị biển rất nhẹ; một miếng là thấy bữa ăn dịu hẳn xuống.",
           imageId: "hotate",
         },
       ],
@@ -268,6 +292,8 @@ export const landingData = {
           name: "Hamachi Sushi",
           description: "Dễ ăn nhưng vị vẫn rõ, hợp gọi sau mấy món mở đầu.",
           badge: "Sạch vị",
+          ingredients: "Cá cam Nhật · Cơm trộn giấm · Gừng",
+          story: "Cá cam béo vừa, sạch vị và sáng miệng; lên bàn là kiểu món kéo cả bàn vào nhịp ăn.",
           imageId: "hamachi",
         },
         {
@@ -275,6 +301,8 @@ export const landingData = {
           name: "Hokkigai Sushi",
           description: "Rõ vị hơn một chút nhưng vẫn khá dễ ăn.",
           badge: "Rõ vị",
+          ingredients: "Sò đỏ · Cơm trộn giấm",
+          story: "Sò đỏ giòn nhẹ, vị biển rõ nhưng không gắt; càng nhai càng thấy vui miệng.",
           imageId: "hokkigai",
         },
         {
@@ -282,6 +310,8 @@ export const landingData = {
           name: "Ika Sushi",
           description: "Mát vị và hợp để xen giữa các món béo hơn.",
           badge: "Gọn vị",
+          ingredients: "Mực tươi · Cơm trộn giấm · Gừng",
+          story: "Mực tươi giòn nhẹ và mát vị, rất hợp để xen giữa những miếng cá béo hơn.",
           imageId: "ika",
         },
         {
@@ -289,6 +319,8 @@ export const landingData = {
           name: "Maguro Sushi",
           description: "Đậm hơn một chút, hợp cho người thích vị cá rõ hơn.",
           badge: "Đậm vừa",
+          ingredients: "Cá ngừ đại dương · Cơm trộn giấm",
+          story: "Cá ngừ đậm umami, lên miệng gọn và chắc vị; dành cho người thích cảm giác rõ ràng.",
           imageId: "maguro",
         },
       ],
@@ -304,6 +336,8 @@ export const landingData = {
           name: "Saba Sushi",
           description: "Vị rõ hơn hẳn, hợp cho ai thích ăn cá đậm hơn một chút.",
           badge: "Đậm vị",
+          ingredients: "Cá thu Nhật · Cơm trộn giấm · Gừng ngâm",
+          story: "Cá thu béo đậm, thơm kiểu cá xanh nhưng vẫn gọn vị; ăn xong còn dư vị rất lâu.",
           imageId: "saba",
         },
         {
@@ -311,6 +345,8 @@ export const landingData = {
           name: "Iwashi Sushi",
           description: "Lạ miệng hơn một chút, hợp khi muốn đổi vị.",
           badge: "Lạ miệng",
+          ingredients: "Cá mòi Nhật · Cơm trộn giấm · Hành lá · Gừng",
+          story: "Cá mòi lên vị mạnh hơn, béo và mặn ngọt rõ rệt; hợp khi muốn đổi gu sang thứ cá tính hơn.",
           imageId: "iwashi",
         },
         {
@@ -318,6 +354,8 @@ export const landingData = {
           name: "Tako Sushi",
           description: "Ăn vui miệng và giúp bàn có thêm món khác kiểu.",
           badge: "Vui miệng",
+          ingredients: "Bạch tuộc luộc · Cơm trộn giấm · Chanh",
+          story: "Bạch tuộc giòn sần sật, nhai đã miệng và có chút tươi chanh kéo vị lại rất sạch.",
           imageId: "tako",
         },
         {
@@ -325,6 +363,8 @@ export const landingData = {
           name: "Anago Sushi",
           description: "Tròn vị, dễ hợp gu và khá đáng gọi nếu thích món đậm hơn.",
           badge: "Tròn vị",
+          ingredients: "Lươn biển nướng · Cơm trộn giấm · Sốt unagi · Mè",
+          story: "Lươn biển mềm, sốt unagi phủ ngọt đậm vừa phải; kiểu miếng chốt cuối rất chắc tay.",
           imageId: "anago",
         },
       ],
@@ -340,6 +380,8 @@ export const landingData = {
           name: "Roe Salmon Sushi",
           description: "Dễ nhận ra, ăn vui miệng và khá hợp để gọi thêm cho bàn đỡ đều.",
           badge: "Nổi bật",
+          ingredients: "Cá hồi · Trứng cá tobiko · Cơm trộn giấm · Rong biển",
+          story: "Cá hồi mềm béo đi cùng tobiko lách tách; vừa vui miệng vừa làm bàn ăn nổi hẳn lên.",
           imageId: "roeSalmon",
         },
         {
@@ -347,6 +389,8 @@ export const landingData = {
           name: "Ikura Sushi",
           description: "Mặn nhẹ và rõ vị, hợp cho người thích món có trứng cá.",
           badge: "Rõ vị",
+          ingredients: "Trứng cá hồi ikura · Cơm trộn giấm · Rong biển nori",
+          story: "Ikura căng mọng, chạm răng là bật vị mặn ngọt mát lạnh rất rõ.",
           imageId: "ikura",
         },
         {
@@ -354,6 +398,8 @@ export const landingData = {
           name: "Negitoro Sushi",
           description: "Mềm và đậm vừa phải, hợp gọi thêm khi muốn đổi vị.",
           badge: "Mượt vị",
+          ingredients: "Cá ngừ băm · Hành lá · Cơm trộn giấm · Rong biển",
+          story: "Cá ngừ băm béo mượt, hành lá kéo vị tươi lên nên ăn rất cuốn mà không ngấy.",
           imageId: "negitoro",
         },
         {
@@ -361,6 +407,8 @@ export const landingData = {
           name: "Inari Sushi",
           description: "Mềm, ngọt nhẹ và là món khá dễ nhận ra trên bàn.",
           badge: "Dễ nhận ra",
+          ingredients: "Đậu hũ chiên ngọt · Cơm trộn giấm · Mè rang",
+          story: "Vỏ đậu hũ ngọt dịu ôm cơm mềm bên trong; êm, dễ ăn và lên bàn nhìn cũng rất duyên.",
           imageId: "inari",
         },
         {
@@ -368,6 +416,8 @@ export const landingData = {
           name: "Unagi Sushi",
           description: "Đậm và tròn vị, hợp cho người muốn chốt thêm một món chắc tay.",
           badge: "Đậm vị",
+          ingredients: "Lươn nước ngọt nướng · Sốt kabayaki · Cơm trộn giấm · Mè",
+          story: "Lươn nướng thơm đậm, sốt kabayaki quấn vị ngọt mặn rất tròn; ăn một miếng là nhớ.",
           imageId: "unagi",
         },
       ],
@@ -383,6 +433,8 @@ export const landingData = {
           name: "Kappa Maki",
           description: "Nhẹ vị, dễ ăn và hợp xen giữa các món đậm hơn.",
           badge: "Cuộn gọn",
+          ingredients: "Dưa leo tươi · Cơm trộn giấm · Rong biển nori",
+          story: "Dưa leo giòn mát, cuộn gọn và sạch vị; đúng kiểu món reset khẩu vị giữa bàn.",
           imageId: "kappaMaki",
         },
         {
@@ -390,6 +442,8 @@ export const landingData = {
           name: "Avocado Roll",
           description: "Mềm, dễ ăn và hợp cho người thích vị nhẹ.",
           badge: "Mềm gọn",
+          ingredients: "Bơ chín · Cơm trộn giấm · Rong biển nori · Mè",
+          story: "Bơ chín béo mượt, mềm nhưng không nặng; miếng cuộn dịu và rất dễ vào.",
           imageId: "avocado",
         },
         {
@@ -397,6 +451,8 @@ export const landingData = {
           name: "California Roll",
           description: "Dễ chia và khá hợp để gọi thêm cho cả bàn.",
           badge: "Dễ chia",
+          ingredients: "Thanh cua · Bơ · Dưa leo · Trứng cá tobiko · Cơm · Nori",
+          story: "Cua, bơ và dưa leo đi với nhau rất cân; cuộn này luôn là món gọi thêm dễ chốt nhất.",
           imageId: "california",
         },
         {
@@ -404,6 +460,8 @@ export const landingData = {
           name: "Natto Roll",
           description: "Lạ miệng hơn một chút, hợp cho ai muốn thử vị khác.",
           badge: "Lạ vị",
+          ingredients: "Đậu nành lên men natto · Cơm trộn giấm · Rong biển nori · Hành lá",
+          story: "Natto dẻo kéo sợi, mùi vị lạ nhưng càng ăn càng ghiền; món dành cho người thích trải nghiệm thật sự.",
           imageId: "natto",
         },
       ],
