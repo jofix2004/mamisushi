@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import heroImage from "@/asses/hero.png";
+import heroImage from "@/asses/hero.webp";
 import type { HeroContent } from "@/lib/landing-data";
 
 import { LandingHeader } from "./landing-header";
@@ -28,11 +28,6 @@ export function HeroBrandVariantSection({
       id="top"
       className="relative overflow-hidden bg-canvas px-[2.5rem] pb-8 pt-1 md:px-[5rem] md:pb-12 xl:px-[7.4rem]"
     >
-      <div className="absolute left-[-5%] top-[8%] z-0 select-none pointer-events-none opacity-[0.015]">
-        <span className="whitespace-nowrap text-[35vw] font-black leading-none tracking-tighter text-ink">
-          {leadWord.toUpperCase()}
-        </span>
-      </div>
 
       <div className="relative z-20 mx-auto max-w-[1320px]">
         <LandingHeader brandName={brandName} />

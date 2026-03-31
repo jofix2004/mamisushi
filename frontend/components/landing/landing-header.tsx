@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import logo from "@/asses/logo.png";
+import logo from "@/asses/logo.webp";
 
 import { CalendarIcon } from "./primitives/icons";
 

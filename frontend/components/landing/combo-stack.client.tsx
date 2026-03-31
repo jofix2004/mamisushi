@@ -3,10 +3,10 @@
 import Image, { type StaticImageData } from "next/image";
 import { motion } from "framer-motion";
 
-import comboLarge from "@/asses/large.png";
-import comboMedium1 from "@/asses/medium1.png";
-import comboMedium2 from "@/asses/medium2.png";
-import comboSmall from "@/asses/small.png";
+import comboLarge from "@/asses/large.webp";
+import comboMedium1 from "@/asses/medium1.webp";
+import comboMedium2 from "@/asses/medium2.webp";
+import comboSmall from "@/asses/small.webp";
 import type { ComboItem } from "@/lib/landing-data";
 
 import { ArrowRightIcon } from "./primitives/icons";

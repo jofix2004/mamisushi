@@ -3,10 +3,10 @@
 import Image, { type StaticImageData } from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 
-import sushiLayer1 from "@/asses/sushi_1.png";
-import sushiLayer2 from "@/asses/sushi_2.png";
-import sushiLayer3 from "@/asses/sushi_3.png";
-import sushiLayer4 from "@/asses/sushi_4.png";
+import sushiLayer1 from "@/asses/sushi_1.webp";
+import sushiLayer2 from "@/asses/sushi_2.webp";
+import sushiLayer3 from "@/asses/sushi_3.webp";
+import sushiLayer4 from "@/asses/sushi_4.webp";
 import type { Pillar } from "@/lib/landing-data";
 
 import { ArrowRightIcon } from "./primitives/icons";
